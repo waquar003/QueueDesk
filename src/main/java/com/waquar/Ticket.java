@@ -77,4 +77,17 @@ public abstract class Ticket {
     }
 
     public abstract double estimateEffortHours();
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", requester='" + requester + '\'' +
+                ", priority=" + priority +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

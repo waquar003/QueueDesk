@@ -1,30 +1,33 @@
 package com.waquar;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-            Scanner sc = new Scanner(System.in);
+        List<Ticket> tickets = new ArrayList<>();
 
-            System.out.println("Enter the starting ticket number");
-            int ticketNumber = sc.nextInt();
-            System.out.println("Enter the number of customer to server");
-            int customersNumber = sc.nextInt();
+        tickets.add(new AccessRequestTicket("Grant Access to S3", "Waquar Ahmad", "S3", AccessLevel.Admin));
+        tickets.add(new BugTicket("Pdf link opening in new tab", "Waquar Ahmad"));
+        tickets.add(new FeatureRequestTicket("Add option to export the doc", "Waquar Ahmad", "People can view the doc locally without need to be online"));
 
-            int vipLane = 0;
-            int priorityRecheck = 0;
+        printTriageBoard(tickets);
 
-            for (int i = 1; i <= customersNumber; i++) {
-                System.out.printf("Now serving ticket #%d\n", ticketNumber+i-1);
+        ((Escalatable) tickets.get(1)).escalate();
+        ((Escalatable) tickets.get(1)).escalate();
+        ((Escalatable) tickets.get(0)).escalate();
 
-                if (i % 5 == 0)    vipLane++;
-                if (i % 10 == 0) priorityRecheck++;
+        printTriageBoard(tickets);
+    }
+
+    private static void printTriageBoard(List<Ticket> tickets) {
+        for (Ticket ticket: tickets) {
+            System.out.println("Estimated Effort in Hours: " + ticket.estimateEffortHours());
+            System.out.println(ticket);
+
+            if (ticket instanceof Escalatable e) {
+                System.out.println("Escalation Level: " + e.escalationLevel());
             }
-
-            System.out.println("Total Served: " + customersNumber);
-            System.out.println("Total VIP Lane: " + vipLane);
-            System.out.println("Total Priority Recheck: " + priorityRecheck);
-
-            sc.close();
+        }
     }
 }

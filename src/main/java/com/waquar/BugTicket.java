@@ -1,8 +1,10 @@
 package com.waquar;
 
-public class BugTicket extends Ticket {
+public class BugTicket extends Ticket implements Escalatable {
     private Severity severity;
     private String stepsToReproduce;
+    private boolean escalated = false;
+    private int escalationLevel = 0;
 
     public BugTicket(String title, String description, String requester, Priority priority, Severity severity, String stepsToReproduce) {
         super(title, description, requester, priority);
@@ -49,5 +51,21 @@ public class BugTicket extends Ticket {
                 return 0;
             }
         }
+    }
+
+    @Override
+    public void escalate() {
+        this.escalated = true;
+        this.escalationLevel++;
+    }
+
+    @Override
+    public boolean isEscalated() {
+        return this.escalated;
+    }
+
+    @Override
+    public int escalationLevel() {
+        return this.escalationLevel;
     }
 }
