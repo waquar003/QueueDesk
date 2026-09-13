@@ -3,7 +3,7 @@ package com.waquar;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class Ticket {
+public abstract class Ticket {
     private final int id;
     private final String title;
     private String description;
@@ -75,4 +75,6 @@ public class Ticket {
     public static int totalCreated() {
         return nextId;
     }
+
+    public abstract double estimateEffortHours();
 }
