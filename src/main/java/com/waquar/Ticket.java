@@ -2,8 +2,10 @@ package com.waquar;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.Set;
 
-public abstract class Ticket {
+public abstract class Ticket implements Comparable<Ticket> {
     private final int id;
     private final String title;
     private String description;
@@ -11,6 +13,8 @@ public abstract class Ticket {
     private Priority priority;
     private Status status;
     private final LocalDateTime createdAt;
+    private String assignee = null;
+    private Set<String> tags;
 
     private static int nextId = 0;
 
@@ -22,6 +26,7 @@ public abstract class Ticket {
         this.priority = priority;
         this.status = Status.OPEN;
         this.createdAt = LocalDateTime.now();
+        this.tags = new HashSet<String>();
     }
 
     public Ticket(String title, String requester) {
@@ -89,5 +94,36 @@ public abstract class Ticket {
                 ", status=" + status +
                 ", createdAt=" + createdAt +
                 '}';
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void addTag(String tag) {
+        tags.add(tag);
+    }
+
+    public int compareTo(Ticket other) {
+        int priorityCompare = other.priority.compareTo(this.priority);
+        if (priorityCompare != 0) return priorityCompare;
+
+        return this.createdAt.compareTo(other.createdAt);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Ticket other)) return false;
+        return this.id == other.id;
     }
 }
