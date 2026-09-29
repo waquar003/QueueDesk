@@ -1,0 +1,5 @@
+Counts per Status: 
+{OPEN=5}Counts per Priority: 
+{HIGH=2, CRITICAL=1, MEDIUM=1, LOW=1}Critical Tickets: 
+[Ticket{id=3, title='DB connection timeout', description='Occurs under heavy load', requester='Waquar A', priority=CRITICAL, status=OPEN, createdAt=2026-09-29T18:38:33.472423716}]Oldest Ticket: 
+Ticket{id=1, title='Login page broken', description='Button not responding on click', requester='Waquar', priority=HIGH, status=OPEN, createdAt=2026-09-29T18:38:33.472125938}

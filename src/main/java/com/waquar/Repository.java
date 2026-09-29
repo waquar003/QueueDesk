@@ -17,7 +17,7 @@ public class Repository<T extends Ticket> {
         for (T item: items) {
             if (item.getId() == id) return item;
         }
-        return null;
+        throw new TicketNotFoundException("There is no matching ticket with this id.");
     }
 
     public Map<String, List<T>> groupByAssignee() {
@@ -34,7 +34,7 @@ public class Repository<T extends Ticket> {
     public static <T extends Ticket> T oldest(List<T> tickets) {
         T earliestTicket = null;
         for (T ticket: tickets) {
-            if (earliestTicket == null || earliestTicket.getCreatedAt().isBefore(ticket.getCreatedAt())) {
+            if (earliestTicket == null || earliestTicket.getCreatedAt().isAfter(ticket.getCreatedAt())) {
                 earliestTicket = ticket;
             }
         }

@@ -1,43 +1,25 @@
 package com.waquar;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
 public class Main {
     public static void main(String[] args) {
-        List<Ticket> tickets = new ArrayList<>();
-
-        tickets.add(new AccessRequestTicket("Grant Access to S3", "Waquar Ahmad", "S3", AccessLevel.Admin));
-        tickets.add(new BugTicket("Pdf link opening in new tab", "Waquar Ahmad"));
-        tickets.add(new FeatureRequestTicket("Add option to export the doc", "Waquar Ahmad", "People can view the doc locally without need to be online"));
-
-        //printTriageBoard(tickets);
-
-        ((Escalatable) tickets.get(1)).escalate();
-        ((Escalatable) tickets.get(1)).escalate();
-        ((Escalatable) tickets.get(0)).escalate();
-
-        //printTriageBoard(tickets);
-
-        PriorityQueue<Ticket> pqDefault = new PriorityQueue<>();
-        for (Ticket ticket: tickets) {
-            pqDefault.offer(ticket);
-        }
-
-        System.out.println("Priority Queue Default");
-        while (!pqDefault.isEmpty()) {
-            System.out.println(pqDefault.poll());
-        }
-
-        PriorityQueue<Ticket> pqCustom = new PriorityQueue<>(TicketComparators.BY_STATUS_THEN_AGE);
-        for (Ticket ticket: tickets) {
-            pqCustom.offer(ticket);
-        }
-
-        System.out.println("Priority Queue Custom");
-        while (!pqCustom.isEmpty()) {
-            System.out.println(pqCustom.poll());
+        try {
+            List<Ticket> tickets = TicketFileLoader.load(Path.of("./input.txt"));
+            String report = ReportGenerator.generate(tickets);
+            ReportGenerator.writeToFile(report, Path.of("./Output.txt"));
+            System.out.println("Report written successfully.");
+            System.out.println(report);
+        } catch (InvalidTicketDataException e) {
+            System.out.println("Bad ticket data on line " + e.getLineNumber() + ": " + e.getMessage());
+        } catch (TicketNotFoundException e) {
+            System.out.println("Ticket not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("File error: " + e.getMessage());
         }
     }
 

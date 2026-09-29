@@ -34,7 +34,12 @@ public abstract class Ticket implements Comparable<Ticket> {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description == null || description.trim().isBlank()) {
+            this.description = "No description provided.";
+            return;
+        }
+        String trimmed = description.trim();
+        this.description = trimmed.length() > 255 ? trimmed.substring(0, 255) : trimmed;
     }
 
     public void setPriority(Priority priority) {
