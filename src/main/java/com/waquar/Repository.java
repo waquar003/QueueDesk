@@ -1,6 +1,7 @@
 package com.waquar;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Repository<T extends Ticket> {
     private List<T> items = new ArrayList<>();
@@ -21,14 +22,8 @@ public class Repository<T extends Ticket> {
     }
 
     public Map<String, List<T>> groupByAssignee() {
-        Map<String, List<T>> map = new HashMap<>();
-
-        for (T item: items) {
-            map.computeIfAbsent(item.getAssignee(), k -> new ArrayList<>())
-                    .add(item);
-        }
-
-        return map;
+        return items.stream()
+                .collect(Collectors.groupingBy(t -> t.getAssignee() == null ? "Unassigned" : t.getAssignee()));
     }
 
     public static <T extends Ticket> T oldest(List<T> tickets) {
@@ -40,5 +35,11 @@ public class Repository<T extends Ticket> {
         }
 
         return earliestTicket;
+    }
+
+    public Optional<T> findByIdSafe(int id) {
+        return items.stream()
+                .filter(item -> item.getId() == id)
+                .findFirst();
     }
 }

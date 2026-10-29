@@ -10,6 +10,28 @@ public class Main {
     public static void main(String[] args) {
         try {
             List<Ticket> tickets = TicketFileLoader.load(Path.of("./input.txt"));
+            tickets.get(0).setAssignee("Sadiq");
+            tickets.get(0).addTag("urgetn");
+
+            TicketAnalytics analytics = new TicketAnalytics();
+            System.out.println(analytics.countByPriority(tickets));
+            System.out.println(analytics.averageEffortHours(tickets));
+            System.out.println(analytics.tagLine(tickets));
+            System.out.println(analytics.oldestOpenTicket(tickets));
+
+            Repository<Ticket> repo = new Repository<>();
+            tickets.forEach(repo::add);
+            repo.findByIdSafe(1).ifPresentOrElse(
+                    t -> System.out.println("Found " + t.getTitle()),
+                    () -> System.out.println("No ticket found with id 1")
+            );
+            repo.findByIdSafe(10).ifPresentOrElse(
+                    t -> System.out.println("Found " + t.getTitle()),
+                    () -> System.out.println("No ticket found with id 10")
+            );
+
+            repo.findById(10);
+
             String report = ReportGenerator.generate(tickets);
             ReportGenerator.writeToFile(report, Path.of("./Output.txt"));
             System.out.println("Report written successfully.");
