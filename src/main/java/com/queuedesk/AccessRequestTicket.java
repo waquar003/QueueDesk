@@ -1,8 +1,12 @@
-package com.waquar;
+package com.queuedesk;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@ToString(callSuper = true)
 public class AccessRequestTicket extends Ticket implements Escalatable {
-    private final String systemName;
-    private final AccessLevel accessLevel;
+    private @Getter final String systemName;
+    private @Getter final AccessLevel accessLevel;
     private boolean escalated = false;
     private int escalationLevel = 0;
 
@@ -22,14 +26,6 @@ public class AccessRequestTicket extends Ticket implements Escalatable {
     @Override
     public double estimateEffortHours() {
         return 5;
-    }
-
-    public String getSystemName() {
-        return systemName;
-    }
-
-    public AccessLevel getAccessLevel() {
-        return accessLevel;
     }
 
     @Override

@@ -1,20 +1,26 @@
-package com.waquar;
+package com.queuedesk;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 
+@ToString
 public abstract class Ticket implements Comparable<Ticket> {
-    private final int id;
-    private final String title;
-    private String description;
-    private final String requester;
-    private Priority priority;
-    private Status status;
-    private final LocalDateTime createdAt;
-    private String assignee = null;
-    private Set<String> tags;
+    private @Getter final int id;
+    private @Getter final String title;
+    private @Getter String description;
+    private @Getter final String requester;
+    private @Setter @Getter Priority priority;
+    private @Setter @Getter Status status;
+    private @Getter final LocalDateTime createdAt;
+    private @Setter @Getter String assignee = null;
+    private @Getter Set<String> tags;
 
     private static int nextId = 0;
 
@@ -42,42 +48,6 @@ public abstract class Ticket implements Comparable<Ticket> {
         this.description = trimmed.length() > 255 ? trimmed.substring(0, 255) : trimmed;
     }
 
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getRequester() {
-        return requester;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
     public long ageInHours() {
         return ChronoUnit.HOURS.between(createdAt, LocalDateTime.now());
     }
@@ -88,36 +58,11 @@ public abstract class Ticket implements Comparable<Ticket> {
 
     public abstract double estimateEffortHours();
 
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", requester='" + requester + '\'' +
-                ", priority=" + priority +
-                ", status=" + status +
-                ", createdAt=" + createdAt +
-                '}';
-    }
-
-    public String getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-    }
-
-
-    public Set<String> getTags() {
-        return tags;
-    }
-
     public void addTag(String tag) {
         tags.add(tag);
     }
 
+    @Override
     public int compareTo(Ticket other) {
         int priorityCompare = other.priority.compareTo(this.priority);
         if (priorityCompare != 0) return priorityCompare;

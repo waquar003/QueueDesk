@@ -1,8 +1,13 @@
-package com.waquar;
+package com.queuedesk;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString(callSuper = true)
 public class BugTicket extends Ticket implements Escalatable {
-    private Severity severity;
-    private String stepsToReproduce;
+    private @Getter @Setter Severity severity;
+    private @Getter @Setter String stepsToReproduce;
     private boolean escalated = false;
     private int escalationLevel = 0;
 
@@ -14,22 +19,6 @@ public class BugTicket extends Ticket implements Escalatable {
 
     public BugTicket(String title, String requester) {
         this(title, "", requester, Priority.LOW, Severity.LOW, "");
-    }
-
-    public Severity getSeverity() {
-        return severity;
-    }
-
-    public void setSeverity(Severity severity) {
-        this.severity = severity;
-    }
-
-    public String getStepsToReproduce() {
-        return stepsToReproduce;
-    }
-
-    public void setStepsToReproduce(String stepsToReproduce) {
-        this.stepsToReproduce = stepsToReproduce;
     }
 
     @Override

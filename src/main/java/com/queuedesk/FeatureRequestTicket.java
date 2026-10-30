@@ -1,8 +1,13 @@
-package com.waquar;
+package com.queuedesk;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString(callSuper = true)
 public class FeatureRequestTicket extends Ticket {
-    private int votes;
-    private final String businessJustification;
+    private @Getter @Setter int votes;
+    private @Getter final String businessJustification;
 
     public FeatureRequestTicket(String title, String description, String requester, Priority priority, int votes, String businessJustification) {
         super(title, description, requester, priority);
@@ -14,18 +19,6 @@ public class FeatureRequestTicket extends Ticket {
         super(title, requester);
         this.votes = 0;
         this.businessJustification = businessJustification;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
-    public String getBusinessJustification() {
-        return businessJustification;
     }
 
     @Override

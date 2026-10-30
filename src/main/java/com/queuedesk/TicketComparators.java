@@ -1,4 +1,4 @@
-package com.waquar;
+package com.queuedesk;
 
 import java.util.Comparator;
 

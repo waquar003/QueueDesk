@@ -1,4 +1,4 @@
-package com.waquar;
+package com.queuedesk;
 
 public interface Escalatable {
     void escalate();
