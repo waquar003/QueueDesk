@@ -1,9 +1,11 @@
 package com.queuedesk;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Getter;
 import lombok.ToString;
 
 @ToString(callSuper = true)
+@JsonTypeName("access")
 public class AccessRequestTicket extends Ticket implements Escalatable {
     private @Getter final String systemName;
     private @Getter final AccessLevel accessLevel;

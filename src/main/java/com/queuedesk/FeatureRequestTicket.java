@@ -1,10 +1,12 @@
 package com.queuedesk;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString(callSuper = true)
+@JsonTypeName("feature")
 public class FeatureRequestTicket extends Ticket {
     private @Getter @Setter int votes;
     private @Getter final String businessJustification;

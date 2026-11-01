@@ -1,6 +1,7 @@
 package com.queuedesk;
 
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,6 +12,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @ToString
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+     @JsonSubTypes.Type(value = BugTicket.class, name = "bug"),
+     @JsonSubTypes.Type(value = FeatureRequestTicket.class, name = "feature"),
+     @JsonSubTypes.Type(value = AccessRequestTicket.class, name = "access")
+})
 public abstract class Ticket implements Comparable<Ticket> {
     private @Getter final int id;
     private @Getter final String title;

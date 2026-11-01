@@ -7,7 +7,14 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         try {
-            List<Ticket> tickets = TicketFileLoader.load(Path.of("./input.txt"));
+            List<Ticket> tickets;
+            if (Path.of("./tickets.json").toFile().exists()) {
+                tickets = TicketJsonStore.load(Path.of("./tickets.json"));
+            } else {
+                tickets = TicketFileLoader.load(Path.of("./input.txt"));
+                TicketJsonStore.save(tickets, Path.of("./tickets.json"));
+            }
+
             tickets.get(0).setAssignee("Sadiq");
             tickets.get(0).addTag("urgetn");
 

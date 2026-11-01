@@ -1,9 +1,11 @@
 package com.queuedesk;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+@JsonTypeName("bug")
 @ToString(callSuper = true)
 public class BugTicket extends Ticket implements Escalatable {
     private @Getter @Setter Severity severity;
