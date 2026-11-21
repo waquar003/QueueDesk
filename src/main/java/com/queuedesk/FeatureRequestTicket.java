@@ -1,9 +1,14 @@
 package com.queuedesk;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @ToString(callSuper = true)
 @JsonTypeName("feature")
@@ -20,6 +25,23 @@ public class FeatureRequestTicket extends Ticket {
     public FeatureRequestTicket(String title, String requester, String businessJustification) {
         super(title, requester);
         this.votes = 0;
+        this.businessJustification = businessJustification;
+    }
+
+    @JsonCreator
+    public FeatureRequestTicket(@JsonProperty("id") int id,
+                                @JsonProperty("title") String title,
+                                @JsonProperty("description") String description,
+                                @JsonProperty("requester") String requester,
+                                @JsonProperty("priority") Priority priority,
+                                @JsonProperty("status") Status status,
+                                @JsonProperty("createdAt") LocalDateTime createdAt,
+                                @JsonProperty("assignee") String assignee,
+                                @JsonProperty("tags") Set<String> tags,
+                                @JsonProperty("votes") int votes,
+                                @JsonProperty("businessJustification") String businessJustification) {
+        super(id, title, description, requester, priority, status, createdAt, assignee, tags);
+        this.votes = votes;
         this.businessJustification = businessJustification;
     }
 

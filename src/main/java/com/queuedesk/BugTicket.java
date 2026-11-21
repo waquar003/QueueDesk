@@ -1,9 +1,14 @@
 package com.queuedesk;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @JsonTypeName("bug")
 @ToString(callSuper = true)
@@ -21,6 +26,27 @@ public class BugTicket extends Ticket implements Escalatable {
 
     public BugTicket(String title, String requester) {
         this(title, "", requester, Priority.LOW, Severity.LOW, "");
+    }
+
+    @JsonCreator
+    public BugTicket(@JsonProperty("id") int id,
+                     @JsonProperty("title") String title,
+                     @JsonProperty("description") String description,
+                     @JsonProperty("requester") String requester,
+                     @JsonProperty("priority") Priority priority,
+                     @JsonProperty("status") Status status,
+                     @JsonProperty("createdAt") LocalDateTime createdAt,
+                     @JsonProperty("assignee") String assignee,
+                     @JsonProperty("tags") Set<String> tags,
+                     @JsonProperty("severity") Severity severity,
+                     @JsonProperty("stepsToReproduce") String stepsToReproduce,
+                     @JsonProperty("escalated") boolean escalated,
+                     @JsonProperty("escalationLevel") int escalationLevel) {
+        super(id, title, description, requester, priority, status, createdAt, assignee, tags);
+        this.severity = severity;
+        this.stepsToReproduce = stepsToReproduce;
+        this.escalated = escalated;
+        this.escalationLevel = escalationLevel;
     }
 
     @Override
@@ -56,6 +82,7 @@ public class BugTicket extends Ticket implements Escalatable {
     }
 
     @Override
+    @JsonProperty("escalationLevel")
     public int escalationLevel() {
         return this.escalationLevel;
     }

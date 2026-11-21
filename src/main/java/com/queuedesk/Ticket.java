@@ -31,15 +31,23 @@ public abstract class Ticket implements Comparable<Ticket> {
 
     private static int nextId = 0;
 
-    public Ticket(String title, String description, String requester, Priority priority) {
-        this.id = ++nextId;
+    protected Ticket(int id, String title, String description, String requester,
+                     Priority priority, Status status, LocalDateTime createdAt,
+                     String assignee, Set<String> tags) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.requester = requester;
         this.priority = priority;
-        this.status = Status.OPEN;
-        this.createdAt = LocalDateTime.now();
-        this.tags = new HashSet<String>();
+        this.status = status;
+        this.createdAt = createdAt;
+        this.assignee = assignee;
+        this.tags = (tags == null) ? new HashSet<>() : new HashSet<>(tags);
+        nextId = Math.max(nextId, id);
+    }
+
+    public Ticket(String title, String description, String requester, Priority priority) {
+        this(++nextId, title, description, requester, priority, Status.OPEN, LocalDateTime.now(), null, null);
     }
 
     public Ticket(String title, String requester) {
