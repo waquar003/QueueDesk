@@ -1,5 +1,5 @@
-Login page broken|Button not responding on click|Waquar|HIGH
-Add dark mode|Requested by multiple users|Ahmad|MEDIUM
-DB connection timeout|Occurs under heavy load|Waquar A|CRITICAL
-Export to PDF|Allow offline viewing|Ahmad W|LOW
-Session timeout too short|Users getting logged out|Waquar Ahmad|HIGH
+bug|Login page broken|Button not responding on click|Waquar|HIGH|CRITICAL|Click login button
+feature|Add dark mode|Requested by multiple users|Ahmad|MEDIUM|25|Support dark theme
+access|Database access|Need database access for debugging|Waquar A|HIGH|PRODUCTION|Admin
+bug|DB connection timeout|Occurs under heavy load|Waquar A|CRITICAL|HIGH|Check database logs
+feature|Export to PDF|Allow offline viewing|Ahmad W|LOW|10|PDF export functionality
