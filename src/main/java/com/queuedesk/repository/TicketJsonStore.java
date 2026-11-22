@@ -1,10 +1,12 @@
-package com.queuedesk;
+package com.queuedesk.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.queuedesk.exceptions.InvalidTicketDataException;
+import com.queuedesk.models.Ticket;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,7 +18,7 @@ public class TicketJsonStore {
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
             .enable(SerializationFeature.INDENT_OUTPUT);
 
-    public static void save(List<Ticket> tickets, Path file) throws IOException, InvalidTicketDataException{
+    public static void save(List<Ticket> tickets, Path file) throws IOException, InvalidTicketDataException {
         try {
             mapper.writerFor(new TypeReference<List<Ticket>>(){}).writeValue(file.toFile(), tickets);
         } catch (JsonProcessingException e) {

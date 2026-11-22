@@ -1,4 +1,7 @@
-package com.queuedesk;
+package com.queuedesk.repository;
+
+import com.queuedesk.exceptions.TicketNotFoundException;
+import com.queuedesk.models.Ticket;
 
 import java.util.*;
 import java.util.stream.Collectors;

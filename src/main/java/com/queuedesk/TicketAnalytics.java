@@ -1,5 +1,9 @@
 package com.queuedesk;
 
+import com.queuedesk.enums.Priority;
+import com.queuedesk.enums.Status;
+import com.queuedesk.models.Ticket;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,10 @@
-package com.queuedesk;
+package com.queuedesk.repository;
+
+import com.queuedesk.enums.Priority;
+import com.queuedesk.enums.Severity;
+import com.queuedesk.exceptions.InvalidTicketDataException;
+import com.queuedesk.models.BugTicket;
+import com.queuedesk.models.Ticket;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

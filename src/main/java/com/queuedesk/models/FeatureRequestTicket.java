@@ -1,8 +1,10 @@
-package com.queuedesk;
+package com.queuedesk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.queuedesk.enums.Priority;
+import com.queuedesk.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,5 +1,7 @@
 package com.queuedesk;
 
+import com.queuedesk.models.Ticket;
+
 import java.util.Comparator;
 
 public class TicketComparators {

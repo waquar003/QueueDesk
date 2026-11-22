@@ -1,4 +1,4 @@
-package com.queuedesk;
+package com.queuedesk.interfaces;
 
 public interface Escalatable {
     void escalate();

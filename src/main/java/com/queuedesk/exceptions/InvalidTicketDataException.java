@@ -1,4 +1,4 @@
-package com.queuedesk;
+package com.queuedesk.exceptions;
 
 import lombok.Getter;
 

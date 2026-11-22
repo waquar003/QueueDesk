@@ -1,4 +1,4 @@
-package com.queuedesk;
+package com.queuedesk.exceptions;
 
 public class TicketNotFoundException extends RuntimeException {
     public TicketNotFoundException(String message) {

@@ -1,5 +1,10 @@
 package com.queuedesk;
 
+import com.queuedesk.enums.Priority;
+import com.queuedesk.enums.Status;
+import com.queuedesk.models.Ticket;
+import com.queuedesk.repository.Repository;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
